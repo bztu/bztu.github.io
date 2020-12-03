@@ -1,15 +1,26 @@
 function setup() {
-    createCanvas(720, 400);
-    noStroke();
-    rectMode(CENTER);
+    createCanvas(710, 400, WEBGL);
   }
   
   function draw() {
-    background(230);
-    fill(244, 122, 158);
-    rect(mouseX, height / 2, mouseY / 2 + 10, mouseY / 2 + 10);
-    fill(237, 34, 93);
-    let inverseX = width - mouseX;
-    let inverseY = height - mouseY;
-    rect(inverseX, height / 2, inverseY / 2 + 10, inverseY / 2 + 10);
+    background(0);
+  
+    let locX = mouseX - height / 2;
+    let locY = mouseY - width / 2;
+  
+    ambientLight(50);
+    directionalLight(255, 0, 0, 0.25, 0.25, 0);
+    pointLight(0, 0, 255, locX, locY, 250);
+  
+    push();
+    translate(-width / 4, 0, 0);
+    rotateZ(frameCount * 0.02);
+    rotateX(frameCount * 0.02);
+    specularMaterial(250);
+    box(100, 100, 100);
+    pop();
+  
+    translate(width / 4, 0, 0);
+    ambientMaterial(250);
+    sphere(120, 64);
   }
